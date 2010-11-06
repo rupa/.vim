@@ -1,0 +1,3 @@
+vim dotfiles using [pathogen](http://www.vim.org/scripts/script.php?script_id=2332).
+
+install.sh links vimrc to $HOME/.vimrc

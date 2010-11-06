@@ -1,0 +1,7 @@
+snippet OPT "optparse skeleton"
+
+parser = optparse.OptionParser($1)
+parser.add_option($2)
+opts, args = parser.parse_args()
+$0
+endsnippet
