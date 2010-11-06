@@ -1,6 +1,8 @@
 " unrelated functions
 
-if has("python")
+if !has("python")
+    finish
+endif
 
 python << EOF
 
@@ -12,5 +14,3 @@ for p in sys.path:
         vim.command(r"set path+=%s" % (p.replace(" ", r"\ ")))
 
 EOF
-
-endif

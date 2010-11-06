@@ -1,6 +1,7 @@
 ":Markdown - create file.mkd.html and opens in browser
-if has("python")
-
+if !has("python")
+   finish
+endif
 command! Markdown :python Mkd().tofile().tobrowser()
 
 python << EOF
@@ -34,5 +35,3 @@ else:
                 b.open('file://%s.mkd.html' % self.name)
 
 EOF
-
-endif

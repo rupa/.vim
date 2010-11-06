@@ -1,9 +1,11 @@
 " :Url
 
-if has("python")
+if !has("python")
+    finish
+endif
 
 fun ShotwebCmpl(A,L,P)
- return "http://\nhttps://\nftp://"
+    return "http://\nhttps://\nftp://"
 endfun
 command! -nargs=? -complete=custom,ShotwebCmpl Url :python shotweb(<f-args>)
 
@@ -32,5 +34,3 @@ def shotweb(url=''):
         vim.current.range.append(page)
 
 EOF
-
-endif
