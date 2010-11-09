@@ -2,6 +2,6 @@ vim dotfiles
 
 uses [pathogen](http://www.vim.org/scripts/script.php?script_id=2332).
 
-plugins in bundles/.
+plugins in bundle/.
 
 git clone && ./install.sh
