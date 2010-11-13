@@ -9,4 +9,4 @@ nnoremap <unique><leader><Left> <C-w>h
 nnoremap <unique><leader><Down> <C-w>j
 nnoremap <unique><leader><Up> <C-w>k
 nnoremap <unique><leader><Right> <C-w>l
-nnoremap <unique><leader><Tab> <C-w>w
+"nnoremap <unique><leader><Tab> <C-w>w
