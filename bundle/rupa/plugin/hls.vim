@@ -1,4 +1,6 @@
-" invisible characters
+" highlights for good coding style
+
+" de-emphasize invisible characters
 highlight NonText ctermfg=brown guifg=brown
 highlight SpecialKey ctermfg=brown guifg=brown
 
@@ -16,7 +18,7 @@ endfunction
 command! HlTab call s:ToggleTabHl()
 call s:ToggleTabHl()
 
-" highlight >80
+" underline >80
 highlight rightMargin cterm=underline gui=underline
 function! s:ToggleRMargin()
     if exists("b:hlrmargin") && b:hlrmargin
