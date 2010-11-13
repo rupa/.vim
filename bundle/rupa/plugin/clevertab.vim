@@ -1,8 +1,10 @@
+" try to get omnicompletion closer to tab
 if version < 700
     finish
 endif
 
 set completeopt+=longest,menuone
+" close window on cursor movement or esc
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
