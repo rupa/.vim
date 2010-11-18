@@ -41,6 +41,7 @@ inoremap jj <ESC>
 
 " make Y like C/D
 nnoremap Y y$
+
 " more intuitive j/k
 nnoremap j gj
 nnoremap k gk
@@ -58,7 +59,7 @@ nnoremap k gk
 " prevent screen clearing
 set t_ti= t_te=
 
-" use normal regexes cf :help /\v
+" use normal regexes. see :help /\v
 nnoremap / /\v
 vnoremap / /\v
 
@@ -110,6 +111,7 @@ if has("autocmd")
  endif
 
  " change terminal size for local terminals
+ " cause i tend to like vim terminals to be longer than other ones
  if $SSH_TTY == "" && $VIM_RESIZE != ""
   set co=80 lines=45
   autocmd VimLeave * set co=80 lines=25
@@ -121,6 +123,7 @@ if has("autocmd")
 
 endif
 
+" stuff for plugins
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
