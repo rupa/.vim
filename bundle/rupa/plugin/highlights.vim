@@ -1,4 +1,4 @@
-" highlights for good coding style
+" make ugly code look ugly
 
 " de-emphasize invisible characters
 highlight NonText ctermfg=brown guifg=brown
