@@ -123,7 +123,17 @@ if has("autocmd")
 
 endif
 
+if !exists("DiffOrig")
+ command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+     \ | wincmd p | diffthis
+endif
+
 " stuff for plugins
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
+" fix CSApprox complaining over ssh
+if &t_Co < 88
+ let g:CSApprox_loaded = 1
+endif
