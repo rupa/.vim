@@ -3,7 +3,8 @@
 " pathogen
 filetype off
 call pathogen#runtime_append_all_bundles()
-filetype plugin indent on
+"filetype plugin indent on
+filetype plugin on
 
 set nocompatible
 set novisualbell
@@ -18,7 +19,7 @@ set expandtab
 set noshowmatch
 set incsearch
 set whichwrap=h,l,~,[,],<,>
-set title
+set notitle
 set shortmess=aoOtTI
 set clipboard=unnamed
 set nobackup

@@ -11,8 +11,13 @@ import os, vim, webbrowser
 try:
     import markdown
 except:
-    def mkd():
-        print 'python-markdown not found'
+    class Mkd(object):
+        def __init__(self):
+            print 'python-markdown not found'
+        def tofile(self):
+            return self
+        def tobrowser(self):
+            pass
 else:
     class Mkd(object):
         ''' markdown transformations '''
