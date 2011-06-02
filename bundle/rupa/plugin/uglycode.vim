@@ -16,8 +16,8 @@
 " -----------------------------------------------------------------------------
 
 " de-emphasize invisible characters
-highlight NonText ctermfg=244 guifg=244
-highlight SpecialKey ctermfg=244 guifg=244
+highlight NonText ctermfg=8 guifg=DarkGray
+highlight SpecialKey ctermfg=8 guifg=DarkGray
 
 " -----------------------------------------------------------------------------
 
@@ -44,7 +44,7 @@ if !exists("g:mylistchars")
     call add(g:mylistchars, "tab:".s:tab.s:tab2.",trail:".s:trail.",eol:".s:eol)
 endif
 let b:counter = 0
-function s:InvChars()
+function! s:InvChars()
     if b:counter == len(g:mylistchars)
         set nolist
         let b:counter = 0
