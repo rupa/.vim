@@ -16,8 +16,8 @@
 " -----------------------------------------------------------------------------
 
 " de-emphasize invisible characters
-highlight NonText ctermfg=8 guifg=DarkGray
-highlight SpecialKey ctermfg=8 guifg=DarkGray
+highlight NonText ctermfg=brown guifg=brown
+highlight SpecialKey ctermfg=brown guifg=brown
 
 " -----------------------------------------------------------------------------
 
