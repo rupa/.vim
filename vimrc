@@ -12,7 +12,9 @@ set backspace=indent,eol,start
 set history=1000
 set ruler
 set showcmd
-set shiftwidth=1
+set shiftwidth=4
+" useless if sw=1
+set smarttab
 set tabstop=4
 set softtabstop=4
 set expandtab
@@ -34,8 +36,25 @@ set encoding=utf8
 set scrolloff=2
 set ttyfast
 set gdefault
-set listchars=tab:▸\ ,eol:¬
 set nojoinspaces
+
+" colors
+if has("gui_running") || &t_Co > 2
+ set background=dark
+ syntax enable
+ try
+  colorscheme desert256
+ catch
+  colorscheme koehler
+ endtry
+endif
+
+" tabs and trailing spaces
+"set listchars=tab:__,trail:_
+"set list
+" long lines
+"highlight rightMargin cterm=underline gui=underline
+"match rightMargin /\%>80v.\+/
 
 " nice mapping for normal mode
 inoremap jj <ESC>
@@ -64,9 +83,6 @@ set t_ti= t_te=
 nnoremap / /\v
 vnoremap / /\v
 
-" toggle invisible chars
-nnoremap <silent> <leader>l :set list!<CR>
-
 " toggle line numbers/cursorline
 nnoremap <silent> <Leader><Leader> :set nu!<CR> :set cursorline!<CR>
 
@@ -82,17 +98,6 @@ nnoremap <leader>u vipJjjj
 noremap <buffer> <Leader>pl :!/usr/bin/perl % <CR>
 noremap <buffer> <Leader>py :!/usr/bin/env python % <CR>
 noremap <buffer> <Leader>sh :!/bin/bash % <CR>
-
-" colors
-if has("gui_running") || &t_Co > 2
- set background=dark
- syntax enable
- try
-  colorscheme desert256
- catch
-  colorscheme koehler
- endtry
-endif
 
 if has("autocmd")
 
