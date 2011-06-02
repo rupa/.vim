@@ -1,33 +1,78 @@
 " make ugly code look ugly
+" provides functions to highlight tabs, trailing spaces, and long-ass lines
+
+" -----------------------------------------------------------------------------
+
+" simple version
+
+" tabs and trailing spaces
+" set listchars=tab:__,trail:_
+" set list
+
+" long lines
+" highlight tooLong cterm=underline gui=underline
+" match tooLong /.\%>81v/
+
+" -----------------------------------------------------------------------------
 
 " de-emphasize invisible characters
-highlight NonText ctermfg=brown guifg=brown
-highlight SpecialKey ctermfg=brown guifg=brown
+" highlight NonText ctermfg=brown guifg=brown
+" highlight SpecialKey ctermfg=brown guifg=brown
 
-" highlight literal tabs and trailing spaces
-highlight Hlt ctermfg=brown cterm=underline guifg=brown gui=underline
-function! s:ToggleTabHl()
-    if exists("b:hltab") && b:hltab
-        match none
-        let b:hltab = 0
+" -----------------------------------------------------------------------------
+
+" cycle through highlights for invisible chars
+" default: tabs/trailing spaces -> tabs/trailing spaces/eol -> none
+" settings:
+"     g:mylistchars - list of listchars to cycle through
+"     g:NoInvChars  - default higlighting to off
+" toggle with :List or <Leader><CR>
+" examples:
+" 'tab:▸\ ,eol:¬', 'tab:»»,trail:»', 'tab:··,trail:·', 'tab:▷▷,trail:▷,eol:¬'
+if !exists("g:mylistchars")
+    let g:mylistchars = ["tab:__,trail:_", "tab:__,trail:_,eol:$"]
+endif
+let b:counter = 0
+function s:InvChars()
+    if b:counter == len(g:mylistchars)
+        set nolist
+        let b:counter = 0
     else
-        match Hlt /\t\|\s\+$/
-        let b:hltab = 1
+        set list
+        execute "set listchars=" . g:mylistchars[b:counter % len(g:mylistchars)]
+        let b:counter += 1
     endif
 endfunction
-command! HlTab call s:ToggleTabHl()
-call s:ToggleTabHl()
+if !exists("g:NoInvChars")
+    call s:InvChars()
+endif
+command! List call s:InvChars()
+nnoremap <silent> <leader><CR> :List<CR>
 
-" underline >80
-highlight rightMargin cterm=underline gui=underline
-function! s:ToggleRMargin()
-    if exists("b:hlrmargin") && b:hlrmargin
-        2match none
-        let b:hlrmargin = 0
+" -----------------------------------------------------------------------------
+
+" highlight long lines
+" settings:
+"     g:LineLength  - max  length (default 80)
+"     g:NoLongLines - default highlighting to off
+" toggle with :Long or <Leader>l
+highlight tooLong cterm=underline gui=underline
+" match tooLong /.\%>81v/
+if !exists("g:LineLength")
+   let g:LineLength = 80
+endif
+function! s:LongLines()
+    if exists("b:longlines")
+        call matchdelete(b:longlines)
+        unlet b:longlines
     else
-        2match rightMargin /.\%>81v/
-        let b:hlrmargin = 1
+        let b:longlines = matchadd('tooLong', '.\%>'.(g:LineLength+1).'v', -1)
     endif
 endfunction
-command! Hl80 call s:ToggleRMargin()
-call s:ToggleRMargin()
+if !exists("g:NoLongLines")
+    call s:LongLines()
+endif
+command! Long call s:LongLines()
+nnoremap <silent> <leader>l :Long<CR>
+
+" vim:fileencoding=utf-8
