@@ -139,7 +139,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-" fix CSApprox complaining over ssh
+" fix CSApprox complaining about lame terminals
 if &t_Co < 88
  let g:CSApprox_loaded = 1
 endif
