@@ -40,13 +40,13 @@ set nojoinspaces
 
 " colors
 if has("gui_running") || &t_Co > 2
- set background=dark
- syntax enable
- try
-  colorscheme desert256
- catch
-  colorscheme koehler
- endtry
+    set background=dark
+    syntax enable
+    try
+        colorscheme desert256
+    catch
+        colorscheme koehler
+    endtry
 endif
 
 " tabs and trailing spaces
@@ -101,37 +101,37 @@ noremap <buffer> <Leader>sh :!/bin/bash % <CR>
 
 if has("autocmd")
 
- " makefiles need literal tabs
- autocmd FileType make set noexpandtab
+    " makefiles need literal tabs
+    autocmd FileType make set noexpandtab
 
- " When editing a file, always jump to the last cursor position
- autocmd BufReadPost *
- \ if line("'\"") > 0 && line ("'\"") <= line("$") |
- \   exe "normal g'\"" |
- \ endif
+    " When editing a file, always jump to the last cursor position
+    autocmd BufReadPost *
+    \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+    \   exe "normal g'\"" |
+    \ endif
 
- " gvim lulz gvim only
- if has("gui_running")
-  autocmd FocusGained * syntax on
-  autocmd FocusLost * syntax off
- endif
+    " get completions from current syntax file
+    au BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
+    set iskeyword+=-,:
 
- " change terminal size for local terminals
- " cause i tend to like vim terminals to be longer than other ones
- if $SSH_TTY == "" && $VIM_RESIZE != ""
-  set co=80 lines=45
-  autocmd VimLeave * set co=80 lines=25
- endif
+    " change terminal size for local terminals
+    " cause i tend to like vim terminals to be longer than other ones
+    if $SSH_TTY == "" && $VIM_RESIZE != ""
+        set co=80 lines=45
+        autocmd VimLeave * set co=80 lines=25
+    endif
 
- " get completions from current syntax file
- au BufEnter * exec('setlocal complete+=k$VIMRUNTIME/syntax/'.&ft.'.vim')
- set iskeyword+=-,:
+    " gvim lulz gvim only
+    if has("gui_running")
+        autocmd FocusGained * syntax on
+        autocmd FocusLost * syntax off
+    endif
 
 endif
 
 if !exists("DiffOrig")
- command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-     \ | wincmd p | diffthis
+    command DiffOrig vert new |
+    \ set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 endif
 
 " stuff for plugins
@@ -141,5 +141,5 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " fix CSApprox complaining about lame terminals
 if &t_Co < 88
- let g:CSApprox_loaded = 1
+    let g:CSApprox_loaded = 1
 endif
