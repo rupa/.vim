@@ -140,6 +140,7 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " fix CSApprox complaining about lame terminals
-if &t_Co < 88
+if &t_Co < 88 || !has("gui")
+    let g:CSApprox_verbose_level = 0
     let g:CSApprox_loaded = 1
 endif
