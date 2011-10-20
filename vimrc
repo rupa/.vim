@@ -99,6 +99,13 @@ noremap <buffer> <Leader>pl :!/usr/bin/perl % <CR>
 noremap <buffer> <Leader>py :!/usr/bin/env python % <CR>
 noremap <buffer> <Leader>sh :!/bin/bash % <CR>
 
+if has("gui_running")
+    set guioptions=aegiLt
+    if has("win32")
+        set guifont=Consolas
+    endif
+endif
+
 if has("autocmd")
 
     " makefiles need literal tabs
@@ -121,8 +128,8 @@ if has("autocmd")
         autocmd VimLeave * set co=80 lines=25
     endif
 
-    " gvim lulz gvim only
     if has("gui_running")
+        " lulz
         autocmd FocusGained * syntax on
         autocmd FocusLost * syntax off
     endif
@@ -138,6 +145,7 @@ endif
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsListSnippets="<c-tab>"
 
 " fix CSApprox complaining about lame terminals
 if &t_Co < 88 || !has("gui")
