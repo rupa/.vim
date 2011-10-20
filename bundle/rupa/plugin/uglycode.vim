@@ -64,12 +64,12 @@ nnoremap <silent> <leader><CR> :List<CR>
 
 " highlight long lines
 " settings:
-"     g:LineLength  - max  length (default 80)
+"     g:LineLength  - max  length (default 79)
 "     g:NoLongLines - default highlighting to off
 " toggle with :Long or <Leader>l
 highlight tooLong cterm=underline gui=underline
 if !exists("g:LineLength")
-   let g:LineLength = 80
+   let g:LineLength = 79
 endif
 function! s:LongLines()
     if exists("b:longlines")
