@@ -1,5 +1,8 @@
-" TODO: accept different length rows?
-"       require at least two rows?
+" INSTALL: put in ~/.vim/plugin/
+"   USAGE: run :Rtbl on a paragraph of pipe-delimited values
+"    TODO: accept different length rows?
+"          require at least two rows?
+"          treat lines of whitespace as blank
 
 if !has("python")
     finish
