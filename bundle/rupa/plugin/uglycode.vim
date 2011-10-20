@@ -30,8 +30,8 @@ highlight SpecialKey ctermfg=brown guifg=brown
 if !exists("g:mylistchars")
     if strlen(substitute(strtrans(nr2char(172)), ".", "x", "g")) == 1
         "let s:tab = nr2char(187)
-        let s:tab = nr2char(9655)
-        let s:tab2 = nr2char(9655)
+        let s:tab = nr2char(9657)
+        let s:tab2 = nr2char(9643)
         let s:trail = nr2char(183)
         let s:eol = nr2char(172)
     else
