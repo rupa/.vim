@@ -117,8 +117,10 @@ if has("autocmd")
     " change terminal size for local terminals
     " cause i tend to like vim terminals to be longer than other ones
     if $SSH_TTY == "" && $VIM_RESIZE != ""
-        set co=80 lines=40
-        autocmd VimLeave * set co=80 lines=25
+        set co=80 lines=35
+        if $VIM_RESIZE > 1
+            autocmd VimLeave * set co=80 lines=25
+        endif
     endif
 
     " gvim lulz gvim only
