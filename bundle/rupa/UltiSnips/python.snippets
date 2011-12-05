@@ -1,7 +1,20 @@
-snippet OPT "optparse skeleton"
+# extends python
 
-parser = optparse.OptionParser($1)
-parser.add_option($2)
-opts, args = parser.parse_args()
+snippet optparse "optparse skeleton"
+usage='%prog [options]'
+version = ''
+parser = OptionParser(usage=usage,
+                      description=__doc__,
+                      version = '%prog %s' % version)
+parser.add_option('-$1', '--$2', action='', default='', type = '', help='')
+(opts, args) = parser.parse_args()
 $0
+endsnippet
+
+snippet index "mod_python"
+def index(req):
+    req.content_type = 'text/plain'
+    req.add_common_vars()
+    for i in req.subprocess_env:
+        req.write('%s %s\n' % (i, req.subprocess_env[i]))
 endsnippet
