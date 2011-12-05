@@ -111,6 +111,9 @@ if has("autocmd")
     " makefiles need literal tabs
     autocmd FileType make set noexpandtab
 
+    " epub files are zip files
+    au BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
+
     " When editing a file, always jump to the last cursor position
     autocmd BufReadPost *
     \ if line("'\"") > 0 && line ("'\"") <= line("$") |
