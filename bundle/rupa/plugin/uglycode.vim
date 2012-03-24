@@ -80,12 +80,14 @@ function! s:LongLines()
         call matchdelete(b:longlines)
         unlet b:longlines
     else
-        let b:longlines = matchadd('tooLong', '.\%>'.(g:LongLineLength+1).'v', -1)
+        let b:longlines =
+            \ matchadd('tooLong', '.\%>'.(g:LongLineLength+1).'v', -1)
     endif
 endfunction
 if !exists("g:LongLineOff")
     if has("autocmd")
-        au BufNewFile,BufRead * if index(g:LongLineExclude, &ft) == -1 | call s:LongLines() | endif
+        au BufNewFile,BufRead * if index(g:LongLineExclude, &ft) == -1
+            \ | call s:LongLines() | endif
     else
         call s:LongLines()
     endif
