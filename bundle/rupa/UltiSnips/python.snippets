@@ -1,4 +1,4 @@
-# extends python
+extends python
 
 snippet optparse "optparse skeleton"
 usage='%prog [options]'
@@ -17,4 +17,14 @@ def index(req):
     req.add_common_vars()
     for i in req.subprocess_env:
         req.write('%s %s\n' % (i, req.subprocess_env[i]))
+endsnippet
+
+snippet wsgi "wsgi/gunicorn"
+def app(environ, start_response):
+    data = repr(environ)
+    start_response("200 OK", [
+        ("Content-Type", "text/plain"),
+        ("Content-Length", str(len(data)))
+    ])
+    return iter([data])
 endsnippet

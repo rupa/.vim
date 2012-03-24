@@ -152,6 +152,8 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsListSnippets="<c-tab>"
 
+let g:SuperTabDefaultCompletionType="context"
+
 " fix CSApprox complaining about lame terminals
 if &t_Co < 88 || !has("gui")
     let g:CSApprox_verbose_level = 0
