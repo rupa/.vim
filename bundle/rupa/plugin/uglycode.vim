@@ -64,23 +64,31 @@ nnoremap <silent> <leader><CR> :List<CR>
 
 " highlight long lines
 " settings:
-"     g:LineLength  - max  length (default 79)
-"     g:NoLongLines - default highlighting to off
+"     g:LongLineLength  - max  length (default 79)
+"     g:LongLineOff - default highlighting to off
+"     g:LongLineExclude - exclude by filetype (default ['', 'text'])
 " toggle with :Long or <Leader>l
 highlight tooLong cterm=underline gui=underline
-if !exists("g:LineLength")
-   let g:LineLength = 79
+if !exists("g:LongLineLength")
+   let g:LongLineLength = 79
+endif
+if !exists("g:LongLineExclude")
+   let g:LongLineExclude = ['', 'text']
 endif
 function! s:LongLines()
     if exists("b:longlines")
         call matchdelete(b:longlines)
         unlet b:longlines
     else
-        let b:longlines = matchadd('tooLong', '.\%>'.(g:LineLength+1).'v', -1)
+        let b:longlines = matchadd('tooLong', '.\%>'.(g:LongLineLength+1).'v', -1)
     endif
 endfunction
-if !exists("g:NoLongLines")
-    call s:LongLines()
+if !exists("g:LongLineOff")
+    if has("autocmd")
+        au BufNewFile,BufRead * if index(g:LongLineExclude, &ft) == -1 | call s:LongLines() | endif
+    else
+        call s:LongLines()
+    endif
 endif
 command! Long call s:LongLines()
 nnoremap <silent> <leader>l :Long<CR>
