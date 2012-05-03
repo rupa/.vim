@@ -113,6 +113,8 @@ if has("autocmd")
 
     " epub files are zip files
     au BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
+    " xlsx files are zip files
+    au BufReadCmd *.xlsx call zip#Browse(expand("<amatch>"))
 
     " When editing a file, always jump to the last cursor position
     autocmd BufReadPost *
@@ -145,6 +147,14 @@ if !exists("DiffOrig")
     command DiffOrig vert new |
     \ set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 endif
+
+function! CursorPing()
+    set cursorline cursorcolumn
+    redraw
+    sleep 50m
+    set nocursorline nocursorcolumn
+endfunction
+nmap <M-Space> :call CursorPing()<CR>
 
 " stuff for plugins
 let g:UltiSnipsExpandTrigger="<tab>"
