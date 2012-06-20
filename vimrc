@@ -83,11 +83,11 @@ set t_ti= t_te=
 nnoremap / /\v
 vnoremap / /\v
 
-" toggle line numbers/cursorline
-nnoremap <silent> <Leader><Leader> :set nu!<CR> :set cursorline!<CR>
+" toggle line numbers
+nnoremap <silent> <Leader>n :set nu!<CR>
 
 " strip trailing whitespace from file
-nnoremap <silent> <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+nnoremap <silent> <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 
 " re-hardwap paragraphs of text
 nnoremap <leader>q gqap
@@ -154,7 +154,7 @@ function! CursorPing()
     sleep 50m
     set nocursorline nocursorcolumn
 endfunction
-nmap <M-Space> :call CursorPing()<CR>
+nmap <Leader><Leader> :call CursorPing()<CR>
 
 " stuff for plugins
 let g:UltiSnipsExpandTrigger="<tab>"
