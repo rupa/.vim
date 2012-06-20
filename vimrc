@@ -50,13 +50,14 @@ if has("gui_running") || &t_Co > 2
 endif
 
 " tabs and trailing spaces
-"set listchars=tab:__,trail:_
-"set list
+set listchars=tab:__,trail:_
+set list
+
 " long lines
 "highlight rightMargin cterm=underline gui=underline
-"match rightMargin /\%>80v.\+/
+"match rightMargin /\%>79v.\+/
 
-" nice mapping for normal mode
+" nice mapping for devices without easy <ESC>
 inoremap jj <ESC>
 
 " make Y like C/D
@@ -65,6 +66,9 @@ nnoremap Y y$
 " more intuitive j/k
 nnoremap j gj
 nnoremap k gk
+
+" put cursor at start of command when repeating
+nmap . .`[
 
 " hardcore mode
 "nnoremap <up> <nop>
@@ -75,9 +79,6 @@ nnoremap k gk
 "inoremap <down> <nop>
 "inoremap <left> <nop>
 "inoremap <right> <nop>
-
-" prevent screen clearing
-set t_ti= t_te=
 
 " use normal regexes. see :help /\v
 nnoremap / /\v
@@ -99,6 +100,19 @@ noremap <buffer> <Leader>pl :!/usr/bin/perl % <CR>
 noremap <buffer> <Leader>py :!/usr/bin/env python % <CR>
 noremap <buffer> <Leader>sh :!/bin/bash % <CR>
 
+" brief crosshairs on the cursor
+function! CursorPing()
+    set cursorline cursorcolumn
+    redraw
+    sleep 50m
+    set nocursorline nocursorcolumn
+endfunction
+nmap <Leader><Leader> :call CursorPing()<CR>
+
+" prevent screen clearing
+set t_ti= t_te=
+
+" gui options
 if has("gui_running")
     set guioptions=aegiLt
     if has("win32")
@@ -128,12 +142,12 @@ if has("autocmd")
 
     " change terminal size for local terminals
     " cause i tend to like vim terminals to be longer than other ones
-    if $SSH_TTY == "" && $VIM_RESIZE != ""
-        set co=80 lines=35
-        if $VIM_RESIZE > 1
-            autocmd VimLeave * set co=80 lines=25
-        endif
-    endif
+    "if $SSH_TTY == "" && $VIM_RESIZE != ""
+    "    set co=80 lines=35
+    "    if $VIM_RESIZE > 1
+    "        autocmd VimLeave * set co=80 lines=25
+    "    endif
+    "endif
 
     if has("gui_running")
         " lulz
@@ -147,14 +161,6 @@ if !exists("DiffOrig")
     command DiffOrig vert new |
     \ set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 endif
-
-function! CursorPing()
-    set cursorline cursorcolumn
-    redraw
-    sleep 50m
-    set nocursorline nocursorcolumn
-endfunction
-nmap <Leader><Leader> :call CursorPing()<CR>
 
 " stuff for plugins
 let g:UltiSnipsExpandTrigger="<tab>"
