@@ -1,4 +1,7 @@
 " try to get omnicompletion closer to tab
+
+finish
+
 if version < 700
     finish
 endif

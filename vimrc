@@ -116,7 +116,9 @@ set t_ti= t_te=
 if has("gui_running")
     set guioptions=aegiLt
     if has("win32")
-        set guifont=Consolas
+        set guifont=Consolas:h10
+    else
+        set guifont=Source\ Code\ Pro:h12
     endif
 endif
 
@@ -155,6 +157,23 @@ if has("autocmd")
         autocmd FocusLost * syntax off
     endif
 
+    " python completion
+    au FileType python set omnifunc=pythoncomplete#Complete
+
+endif
+
+" Add the virtualenv's site-packages to vim path
+if has("python")
+py << EOF
+import os.path
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
 endif
 
 if !exists("DiffOrig")
@@ -162,11 +181,14 @@ if !exists("DiffOrig")
     \ set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
 endif
 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! %!sudo tee > /dev/null %
+
 " stuff for plugins
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsListSnippets="<c-tab>"
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<tab>"
+"let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+"let g:UltiSnipsListSnippets="<c-tab>"
 
 let g:SuperTabDefaultCompletionType="context"
 
