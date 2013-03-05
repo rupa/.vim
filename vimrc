@@ -197,3 +197,6 @@ if &t_Co < 88 || !has("gui")
     let g:CSApprox_verbose_level = 0
     let g:CSApprox_loaded = 1
 endif
+
+" gitgutter off by default
+let g:gitgutter_highlights = 0
