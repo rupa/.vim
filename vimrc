@@ -2,7 +2,8 @@
 
 " pathogen
 filetype off
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
+call pathogen#helptags()
 "filetype plugin indent on
 filetype plugin on
 
@@ -123,6 +124,9 @@ if has("gui_running")
 endif
 
 if has("autocmd")
+
+    "autocmd InsertEnter * hi Normal ctermfg=251 ctermbg=DarkGray guifg=#cccccc guibg=#111111
+    "autocmd InsertLeave * hi Normal ctermfg=251 ctermbg=Black guifg=#cccccc guibg=#000000
 
     " makefiles need literal tabs
     autocmd FileType make set noexpandtab
