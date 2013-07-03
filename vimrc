@@ -38,6 +38,7 @@ set scrolloff=2
 set ttyfast
 set gdefault
 set nojoinspaces
+set modeline
 
 " colors
 if has("gui_running") || &t_Co > 2
@@ -202,5 +203,5 @@ if &t_Co < 88 || !has("gui")
     let g:CSApprox_loaded = 1
 endif
 
-" gitgutter off by default
-let g:gitgutter_highlights = 0
+let g:khuno_ignore="E302,E121"
+nmap <silent><Leader>x <Esc>:Khuno show<CR>
