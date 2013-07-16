@@ -70,7 +70,8 @@ nnoremap j gj
 nnoremap k gk
 
 " put cursor at start of command when repeating
-nmap . .`[
+" breaks with vim-flake8
+"nmap . .`[
 
 " hardcore mode
 "nnoremap <up> <nop>
