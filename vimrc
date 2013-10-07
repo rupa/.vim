@@ -39,6 +39,11 @@ set ttyfast
 set gdefault
 set nojoinspaces
 set modeline
+"set relativenumber
+"set number
+
+" I keep typing :Wq
+"com Wq wq
 
 " colors
 if has("gui_running") || &t_Co > 2
@@ -69,8 +74,11 @@ nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
 
+" sudo write
+cmap w!! w !sudo tee > /dev/null %
+
 " put cursor at start of command when repeating
-nmap . .`[
+"nmap . .`[
 
 " hardcore mode
 "nnoremap <up> <nop>
@@ -125,6 +133,8 @@ if has("gui_running")
 endif
 
 if has("autocmd")
+
+    au BufEnter /tmp/crontab.* setl backupcopy=yes
 
     "autocmd InsertEnter * hi Normal ctermfg=251 ctermbg=DarkGray guifg=#cccccc guibg=#111111
     "autocmd InsertLeave * hi Normal ctermfg=251 ctermbg=Black guifg=#cccccc guibg=#000000
