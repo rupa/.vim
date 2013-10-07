@@ -78,6 +78,7 @@ nnoremap k gk
 cmap w!! w !sudo tee > /dev/null %
 
 " put cursor at start of command when repeating
+" breaks with vim-flake8
 "nmap . .`[
 
 " hardcore mode
