@@ -41,6 +41,7 @@ set nojoinspaces
 set modeline
 "set relativenumber
 "set number
+set cryptmethod=blowfish
 
 " I keep typing :Wq
 "com Wq wq
@@ -214,5 +215,5 @@ if &t_Co < 88 || !has("gui")
     let g:CSApprox_loaded = 1
 endif
 
-let g:khuno_ignore="E302,E121"
+let g:khuno_ignore="E302,E121,E261"
 nmap <silent><Leader>x <Esc>:Khuno show<CR>
