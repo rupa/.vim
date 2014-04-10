@@ -142,7 +142,7 @@ if has("autocmd")
     "autocmd InsertLeave * hi Normal ctermfg=251 ctermbg=Black guifg=#cccccc guibg=#000000
 
     " makefiles need literal tabs
-    autocmd FileType make set noexpandtab
+    autocmd FileType make setlocal noexpandtab
 
     " epub files are zip files
     au BufReadCmd *.epub call zip#Browse(expand("<amatch>"))
