@@ -66,7 +66,7 @@ set list
 "match rightMargin /\%>79v.\+/
 
 " nice mapping for devices without easy <ESC>
-inoremap jj <ESC>
+"inoremap jj <ESC>
 
 " make Y like C/D
 nnoremap Y y$
