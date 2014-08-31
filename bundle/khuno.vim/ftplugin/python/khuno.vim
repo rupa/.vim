@@ -12,7 +12,6 @@ if exists('g:loaded_mark') || (v:version == 701 && ! exists('*matchadd')) || (v:
   finish
 endif
 
-
 if exists("g:loaded_khuno") || &cp
   finish
 endif
@@ -257,17 +256,6 @@ function! s:Flake()
     let b:khuno_debug = {}
   endif
 
-  " Attempt to remove previous run temporary files
-  if has_key(b:khuno_debug, 'temp_file')
-    call delete(b:khuno_debug.temp_file)
-  endif
-  if has_key(b:khuno_debug, 'temp_python_file')
-    call delete(b:khuno_debug.temp_python_file)
-  endif
-  if has_key(b:khuno_debug, 'temp_error')
-    call delete(b:khuno_debug.temp_error)
-  endif
-
   if exists("g:khuno_builtins")
     let s:khuno_builtins_opt=" --builtins=".g:khuno_builtins
   else
@@ -286,7 +274,14 @@ function! s:Flake()
     let s:khuno_max_line_length=""
   endif
 
-  let cmd=g:khuno_flake_cmd . s:khuno_builtins_opt . s:khuno_ignores . s:khuno_max_line_length
+  let s:khuno_conffile = s:FindProjectConffile()
+  if s:khuno_conffile != ""
+    let s:khuno_config_opt=" --config=".s:khuno_conffile
+  else
+    let s:khuno_config_opt=""
+  endif
+
+  let cmd=g:khuno_flake_cmd . s:khuno_builtins_opt . s:khuno_ignores . s:khuno_max_line_length . s:khuno_config_opt
 
   " Write to a temp path so that unmodified contents are parsed
   " correctly, regardless.
@@ -295,6 +290,16 @@ function! s:Flake()
   let cmd = cmd . " ". tmp_path
   let b:khuno_debug.temp_python_file = tmp_path
   call s:AsyncCmd(cmd)
+endfunction
+
+
+function! s:FindProjectConffile()
+  let conffile = findfile("setup.cfg", ".;")
+  if conffile != ""
+    return conffile
+  else
+    return findfile("tox.ini", ".;")
+  endif
 endfunction
 
 
@@ -382,7 +387,7 @@ function! s:ShowErrors() abort
     if line != "last_error_line"
       let err = b:flake_errors[line][0]
       if (err['error_column'] > 0)
-        if err['error_text'] =~ '\v\s+(line|trailing whitespace)'
+        if err['error_text'] =~ '\v\s+(line|trailing whitespace|invalid syntax)'
           let match = '\%' . line . 'l\n\@!'
         else
           let match = '^\%'. line . 'l\_.\{-}\zs\k\+\k\@!\%>' . err['error_column'] . 'c'
@@ -435,6 +440,14 @@ function! s:AsyncCmd(cmd)
   if !exists('b:khuno_error_files')
     let b:khuno_error_files = []
   endif
+  let temp_dir_location = fnamemodify(tempname(),":p:h:")
+
+  " If the directory for the temp files does not exist go
+  " ahead and create one for us
+  if !exists(temp_dir_location)
+    call system('mkdir ' . temp_dir_location)
+  endif
+
   let s:khuno_temp_file = tempname()
   let s:khuno_temp_error_file = tempname()
   let command = "! " . a:cmd . " > " . s:khuno_temp_file . " 2> " . s:khuno_temp_error_file . " &"
