@@ -61,6 +61,14 @@ endif
 set listchars=tab:__,trail:_
 set list
 
+let term=$TERM
+if term == 'xterm-256color-italic'
+  highlight Comment gui=italic
+  highlight Comment cterm=italic
+  highlight htmlArg gui=italic
+  highlight htmlArg cterm=italic
+endif
+
 " long lines
 "highlight rightMargin cterm=underline gui=underline
 "match rightMargin /\%>79v.\+/
@@ -217,3 +225,11 @@ endif
 
 let g:khuno_ignore="E302,E121,E261"
 nmap <silent><Leader>x <Esc>:Khuno show<CR>
+
+let at_vistar=$AT_VISTAR
+if at_vistar == '1'
+    set shiftwidth=2
+    set tabstop=2
+    set softtabstop=2
+    let g:khuno_ignore="E111,E114,E121,E127,E128,E221,E225,E241,E251"
+endif
