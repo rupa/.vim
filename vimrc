@@ -157,6 +157,8 @@ if has("autocmd")
     " xlsx files are zip files
     au BufReadCmd *.xlsx call zip#Browse(expand("<amatch>"))
 
+    au BufNewFile,BufRead *.wsgi set filetype=python
+
     " When editing a file, always jump to the last cursor position
     autocmd BufReadPost *
     \ if line("'\"") > 0 && line ("'\"") <= line("$") |
