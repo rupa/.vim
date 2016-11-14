@@ -63,10 +63,10 @@ set list
 
 let term=$TERM
 if term == 'xterm-256color-italic'
-  highlight Comment gui=italic
-  highlight Comment cterm=italic
-  highlight htmlArg gui=italic
-  highlight htmlArg cterm=italic
+    highlight Comment gui=italic
+    highlight Comment cterm=italic
+    highlight htmlArg gui=italic
+    highlight htmlArg cterm=italic
 endif
 
 " long lines
